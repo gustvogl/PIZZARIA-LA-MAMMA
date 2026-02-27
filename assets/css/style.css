@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* Variáveis de cores para facilitar a manutenção */
+:root {
+    --vermelho-pizzaria: #ca3c3f;
+    --verde-manjericao: #2d5a27;
+    --creme-massa: #fdfaf5;
+    --texto-escuro: #2b2b2b;
+    --cinza-claro: #999999;
+}
+
+body {
+    color: var(--texto-escuro);
+    margin: 0;
+    font-family: "Barlow", sans-serif;
+    width: 100%;
+    background-color: var(--creme-massa); /* Fundo levemente creme para não cansar a vista */
+}
+
+a {
+    text-decoration: none;
+    color: var(--texto-escuro);
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--vermelho-pizzaria);
+}
+
+/* Header e Navegação */
+.header {
+    width: auto;
+    text-align: center;
+    padding: 0;
+    margin-top: 40px;
+}
+
+.menu {
+    width: auto;
+    text-align: center;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.menu-links {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+/* Banner Principal */
+.banner {
+    width: 100%;
+    text-align: center;
+    background-color: #fff;
+    padding: 60px 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.coluna {
+    width: 45%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.banner p {
+    font-size: 48px;
+    font-weight: 900;
+    text-align: left;
+    padding-left: 100px;
+    line-height: 1.1;
+    color: var(--verde-manjericao);
+}
+
+.banner p span {
+    color: var(--vermelho-pizzaria);
+}
+
+/* Botão de Pedido */
+.botao {
+    border: 2px solid var(--vermelho-pizzaria);
+    background-color: var(--vermelho-pizzaria);
+    color: white !important;
+    border-radius: 50px;
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(202, 60, 63, 0.3);
+}
+
+.botao:hover {
+    background-color: #a83235;
+    transform: scale(1.05);
+}
+
+.banner img {
+    width: 85%;
+    filter: drop-shadow(10px 10px 20px rgba(0,0,0,0.2)); /* Deixa a pizza com profundidade */
+}
+
+/* Cardápio */
+.cardapio {
+    box-sizing: border-box;
+    border-top: 2px solid var(--verde-manjericao);
+    width: 90%;
+    margin: 80px auto;
+    max-width: 800px;
+    text-align: center;
+    padding: 50px 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.cardapio-categoria {
+    text-align: center;
+    color: var(--verde-manjericao);
+    font-size: 28px;
+    font-weight: 800;
+    margin-top: 30px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--vermelho-pizzaria);
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.cardapio-item {
+    padding: 25px 0;
+    text-align: left;
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+
+.cardapio-nome {
+    display: inline-block;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--texto-escuro);
+}
+
+.cardapio-preco {
+    float: right; /* Preço alinhado à direita fica mais profissional */
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--vermelho-pizzaria);
+}
+
+.cardapio-descricao {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Rodapé */
+footer {
+    margin-top: 100px;
+    text-align: center;
+    padding: 60px;
+    font-size: 14px;
+    color: #eee;
+    background-color: #1a1a1a;
+}
+
+/* WhatsApp Flutuante */
+.link-whatsapp img {
+    height: 65px;
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    transition: transform 0.3s;
+}
+
+.link-whatsapp img:hover {
+    transform: rotate(10deg) scale(1.1);
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .coluna {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+    
+    .banner p {
+        font-size: 32px;
+        text-align: center;
+        padding: 0 20px;
+    }
+    
+    .cardapio-preco {
+        float: none;
+        display: block;
+        margin-top: 5px;
+    }
+}
