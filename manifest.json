@@ -1,0 +1,23 @@
+{
+    "name": "Pizzaria La Mamma",
+    "short_name": "La Mamma",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ff0000",
+    "description": "A delicious pizza restaurant offering a variety of toppings and flavors.",
+    "icons": [
+        {
+            "src": "img/logopwa.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "img/logopwa.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+        }
+    ]
+}
