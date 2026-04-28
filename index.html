@@ -1,219 +1,1746 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bella Napoli - Pizzaria Artesanal</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>La Mamma Pizzaria – Fermentação Natural</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-</head>
-
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                fontFamily: {
-                    barlow: ['Barlow', 'sans-serif'],
-                },
-                colors: {
-                    primary: '#ca3c3f',
-                    secondary: '#2d5a27',
-                    dark: '#1a1a1a',
-                    muted: '#666666',
-                    footer: '#111111',
-                }
-            },
-        },
-    }
-</script>
-
-<body class="bg-[#fdfaf5] font-barlow">
-    <nav class="bg-white shadow-md fixed w-full z-10" x-data="{ open: false }">
-        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center h-20">
-            <a href="#" class="flex items-center space-x-2">
-                <img src="assets/images/Logotipo pizzaria laranja e preto.png" alt="Logo" class="h-12 w-auto">
-                <span class="text-2xl font-black text-primary hidden sm:inline italic">PIZZARIA LA MAMMA</span>
-            </a>
-
-            <button @click="open = !open" class="md:hidden text-gray-700 focus:outline-none">
-                <svg x-show="!open" class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                <svg x-show="open" class="h-8 w-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-
-            <div class="hidden md:flex space-x-8">
-                <a href="#home" class="text-gray-700 hover:text-primary font-bold uppercase text-sm tracking-widest">Home</a>
-                <a href="#cardapio" class="text-gray-700 hover:text-primary font-bold uppercase text-sm tracking-widest">Cardápio</a>
-                <a href="#sobre" class="text-gray-700 hover:text-primary font-bold uppercase text-sm tracking-widest">Sobre</a>
-                <a href="#contato" class="text-gray-700 hover:text-primary font-bold uppercase text-sm tracking-widest">Contato</a>
-            </div>
-        </div>
-
-        <div x-show="open" class="md:hidden bg-white shadow-md border-t">
-            <a href="#home" class="block px-4 py-3 text-gray-700 hover:bg-red-50 font-bold">Home</a>
-            <a href="#cardapio" class="block px-4 py-3 text-gray-700 hover:bg-red-50 font-bold">Cardápio</a>
-            <a href="#sobre" class="block px-4 py-3 text-gray-700 hover:bg-red-50 font-bold">Sobre</a>
-            <a href="#contato" class="block px-4 py-3 text-gray-700 hover:bg-red-50 font-bold">Contato</a>
-        </div>
-    </nav>
-
-    <div class="h-20"></div>
-
-    <section class="banner py-16">
-        <div class="coluna">
-            <div class="px-6 md:px-20">
-                <p class="leading-tight">
-                    <span class="text-secondary block text-lg uppercase tracking-widest font-bold mb-2">Tradição Italiana</span>
-                    <b class="text-5xl md:text-6xl text-dark">A melhor pizza de <span class="text-primary">fermentação natural</span></b>
-                </p>
-                <div class="mt-8">
-                    <a class="botao bg-primary hover:bg-red-700 transition-all px-10 py-4 text-white rounded-full font-bold shadow-lg inline-block" href="#cardapio">
-                        QUERO MINHA PIZZA
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="coluna">
-            <img src="./assets/images/Logotipo pizzaria laranja e preto (1).png" alt="Pizza" class="drop-shadow-2xl">
-        </div>
-    </section>
-
-    <section class="cardapio bg-white rounded-3xl shadow-xl overflow-hidden max-w-4xl mx-auto p-6 md:p-12" id="cardapio">
-        <h1 class="text-4xl font-black text-center text-dark italic">Nosso Cardápio</h1>
-
-        <nav id="nav-categorias" class="overflow-x-auto whitespace-nowrap snap-x flex justify-center gap-3 mt-8 pb-4">
-            <button data-cat="tradicionais" class="btn-cat snap-start px-6 py-2 rounded-full bg-primary text-white font-bold text-sm uppercase">Tradicionais</button>
-            <button data-cat="especiais" class="btn-cat snap-start px-6 py-2 rounded-full bg-[#ebebeb] text-dark font-bold text-sm uppercase">Especiais</button>
-            <button data-cat="bebidas" class="btn-cat snap-start px-6 py-2 rounded-full bg-[#ebebeb] text-dark font-bold text-sm uppercase">Bebidas</button>
-            <button data-cat="sobremesas" class="btn-cat snap-start px-6 py-2 rounded-full bg-[#ebebeb] text-dark font-bold text-sm uppercase">Doces</button>
-        </nav>
-
-        <div id="cat-tradicionais" class="cardapio-conteudo">
-            <div class="text-secondary font-bold text-2xl mt-10 mb-4 border-b-2 border-primary inline-block">Pizzas Tradicionais</div>
-            
-            <div class="cardapio-item flex flex-col md:flex-row justify-between border-b border-gray-100 py-6">
-                <div class="flex-1">
-                    <div class="cardapio-nome text-xl font-bold text-dark">Margherita</div>
-                    <div class="cardapio-descricao text-muted">Molho de tomate italiano, muçarela e manjericão fresco.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl mt-2 md:mt-0">R$ 42,00</div>
-            </div>
-
-            <div class="cardapio-item flex flex-col md:flex-row justify-between border-b border-gray-100 py-6">
-                <div class="flex-1">
-                    <div class="cardapio-nome text-xl font-bold text-dark">Calabresa</div>
-                    <div class="cardapio-descricao text-muted">Muçarela, calabresa artesanal e cebola roxa.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl mt-2 md:mt-0">R$ 38,00</div>
-            </div>
-        </div>
-
-        <div id="cat-especiais" class="cardapio-conteudo hidden">
-            <div class="text-secondary font-bold text-2xl mt-10 border-b-2 border-primary inline-block">Pizzas Especiais</div>
-            <div class="cardapio-item flex justify-between py-6 border-b">
-                <div>
-                    <div class="cardapio-nome text-xl font-bold text-dark">Quatro Queijos</div>
-                    <div class="cardapio-descricao text-muted">Muçarela, gorgonzola, parmesão e provolone.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl">R$ 48,00</div>
-            </div>
-            <div class="cardapio-item flex justify-between py-6">
-                <div>
-                    <div class="cardapio-nome text-xl font-bold text-dark">Portuguesa Gourmet</div>
-                    <div class="cardapio-descricao text-muted">Presunto de parma, ovos caipiras e azeitonas.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl">R$ 45,00</div>
-            </div>
-        </div>
-
-        <div id="cat-bebidas" class="cardapio-conteudo hidden">
-            <div class="text-secondary font-bold text-2xl mt-10 border-b-2 border-primary inline-block">Bebidas</div>
-            <div class="cardapio-item flex justify-between py-6 border-b">
-                <div>
-                    <div class="cardapio-nome text-xl font-bold text-dark">Vinho da Casa</div>
-                    <div class="cardapio-descricao text-muted">Taça 200ml - Cabernet Sauvignon.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl">R$ 18,00</div>
-            </div>
-            <div class="cardapio-item flex justify-between py-6">
-                <div>
-                    <div class="cardapio-nome text-xl font-bold text-dark">Sucos Naturais</div>
-                    <div class="cardapio-descricao text-muted">Laranja ou Limão.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl">R$ 10,00</div>
-            </div>
-        </div>
-
-        <div id="cat-sobremesas" class="cardapio-conteudo hidden">
-            <div class="text-secondary font-bold text-2xl mt-10 border-b-2 border-primary inline-block">Sobremesas</div>
-            <div class="cardapio-item flex justify-between py-6 border-b">
-                <div>
-                    <div class="cardapio-nome text-xl font-bold text-dark">Pizza de Nutella</div>
-                    <div class="cardapio-descricao text-muted">Nutella cremosa e morangos frescos.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl">R$ 25,00</div>
-            </div>
-            <div class="cardapio-item flex justify-between py-6">
-                <div>
-                    <div class="cardapio-nome text-xl font-bold text-dark">Tiramisu</div>
-                    <div class="cardapio-descricao text-muted">Sobremesa clássica italiana com café.</div>
-                </div>
-                <div class="cardapio-preco text-primary font-black text-xl">R$ 22,00</div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="mt-[100px] text-center p-[60px] text-white bg-footer border-t-4 border-primary">
-        <div class="max-w-4xl mx-auto">
-            <h3 class="font-black text-2xl italic mb-4 text-primary uppercase">Bella Napoli</h3>
-            <p class="my-2 text-gray-400">Rua das Pizzas, 123, Centro - Sorocaba/SP</p>
-            <div class="flex justify-center gap-4 my-4">
-                <span class="bg-secondary px-3 py-1 rounded text-xs font-bold tracking-widest uppercase">Delivery</span>
-                <span class="bg-primary px-3 py-1 rounded text-xs font-bold tracking-widest uppercase">Salão</span>
-            </div>
-            <p class="text-sm opacity-70 italic">Aberto de Terça a Domingo: 18h às 23h30</p>
-        </div>
-    </footer>
-
-    <a href="https://wa.me/5515987654321" target="_blank" class="fixed right-6 bottom-6 transition-transform hover:scale-110 z-50">
-        <img src="./assets/images/whatsapp.png" alt="WhatsApp" class="h-16 w-16">
-    </a>
-
-    <script>
-        const botoes = document.querySelectorAll('.btn-cat');
-        const conteudos = document.querySelectorAll('.cardapio-conteudo');
-
-        function mostrarCategoria(cat) {
-            conteudos.forEach(div => {
-                if(div.id === 'cat-' + cat) {
-                    div.classList.remove('hidden');
-                } else {
-                    div.classList.add('hidden');
-                }
-            });
-
-            botoes.forEach(btn => {
-                if (btn.dataset.cat === cat) {
-                    btn.classList.add('bg-primary', 'text-white');
-                    btn.classList.remove('bg-[#ebebeb]', 'text-dark');
-                } else {
-                    btn.classList.remove('bg-primary', 'text-white');
-                    btn.classList.add('bg-[#ebebeb]', 'text-dark');
-                }
-            });
+        :root {
+            --red: #C0392B;
+            --red-dark: #96281B;
+            --red-light: #E74C3C;
+            --cream: #FAF6EE;
+            --cream-dark: #F0E8D5;
+            --ink: #1C1009;
+            --charcoal: #2C2416;
+            --warm-gray: #8B7355;
+            --gold: #C9A84C;
+            --gold-light: #E8C87A;
+            --green: #2D5A27;
         }
 
-        botoes.forEach(btn => {
-            btn.addEventListener('click', () => {
-                mostrarCategoria(btn.dataset.cat);
-            });
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--cream);
+            font-family: 'DM Sans', sans-serif;
+            color: var(--ink);
+            overflow-x: hidden;
+        }
+
+        /* NOISE OVERLAY */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.4;
+        }
+
+        /* ====== NAV ====== */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(250, 246, 238, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.3);
+            padding: 0 2rem;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--red);
+            letter-spacing: -0.02em;
+            font-style: italic;
+        }
+
+        .nav-logo span { color: var(--ink); font-style: normal; font-weight: 400; font-size: 0.65rem; letter-spacing: 0.25em; display: block; text-transform: uppercase; }
+
+        .nav-links { display: flex; gap: 2.5rem; }
+        .nav-links a {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--charcoal);
+            text-decoration: none;
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px; left: 0; right: 0;
+            height: 1px;
+            background: var(--red);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+        .nav-links a:hover { color: var(--red); }
+        .nav-links a:hover::after { transform: scaleX(1); }
+
+        .nav-cart-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 0.55rem 1.2rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+        .nav-cart-btn:hover { background: var(--red-dark); transform: scale(1.03); }
+        .cart-badge {
+            background: var(--gold);
+            color: var(--ink);
+            border-radius: 50%;
+            width: 18px; height: 18px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .cart-badge.show { display: flex; }
+
+        .hamburger { display: none; background: none; border: none; cursor: pointer; flex-direction: column; gap: 5px; }
+        .hamburger span { display: block; width: 24px; height: 2px; background: var(--ink); transition: all 0.3s; }
+
+        /* ====== HERO ====== */
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 72px;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(192,57,43,0.06) 0%, transparent 70%),
+                        radial-gradient(ellipse 50% 80% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+        }
+
+        .hero-decor {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 620px; height: 620px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(192,57,43,0.08) 0%, rgba(201,168,76,0.05) 50%, transparent 75%);
+            border: 1px solid rgba(201,168,76,0.2);
+        }
+
+        .hero-decor::before {
+            content: '';
+            position: absolute;
+            inset: 30px;
+            border-radius: 50%;
+            border: 1px dashed rgba(201,168,76,0.25);
+        }
+
+        .hero-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-eyebrow::before, .hero-eyebrow::after {
+            content: '';
+            width: 32px; height: 1px;
+            background: var(--gold);
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 5vw, 5.5rem);
+            line-height: 1.05;
+            font-weight: 900;
+            color: var(--ink);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--red);
+        }
+
+        .hero-sub {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--warm-gray);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background: var(--red);
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            padding: 1rem 2.5rem;
+            border-radius: 100px;
+            transition: all 0.25s;
+            box-shadow: 0 8px 30px rgba(192,57,43,0.3);
+        }
+        .hero-cta:hover {
+            background: var(--red-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 14px 40px rgba(192,57,43,0.35);
+        }
+
+        .hero-cta-ghost {
+            display: inline-block;
+            color: var(--ink);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 1rem 2rem;
+            border-radius: 100px;
+            border: 1px solid rgba(44,36,22,0.25);
+            margin-left: 1rem;
+            transition: all 0.25s;
+        }
+        .hero-cta-ghost:hover { border-color: var(--red); color: var(--red); }
+
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .hero-pizza-ring {
+            width: 480px; height: 480px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--cream-dark) 0%, var(--cream) 100%);
+            border: 1px solid rgba(201,168,76,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(44,36,22,0.1);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .hero-pizza-ring img {
+            width: 88%;
+            height: 88%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .hero-badge {
+            position: absolute;
+            bottom: 30px; right: -10px;
+            background: var(--red);
+            color: #fff;
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.7rem;
+            text-align: center;
+            line-height: 1.4;
+            padding: 8px;
+            box-shadow: 0 8px 24px rgba(192,57,43,0.4);
+            animation: spin-slow 20s linear infinite;
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .hero-badge-inner {
+            animation: spin-slow-reverse 20s linear infinite;
+            text-align: center;
+        }
+
+        @keyframes spin-slow-reverse {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
+        .hero-badge-inner strong { display: block; font-size: 1.3rem; font-weight: 900; }
+
+        .hero-stats {
+            display: flex;
+            gap: 2rem;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(44,36,22,0.1);
+        }
+
+        .stat { text-align: left; }
+        .stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--red);
+            line-height: 1;
+        }
+        .stat-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--warm-gray);
+            margin-top: 0.25rem;
+        }
+
+        /* ====== DIVIDER ====== */
+        .divider {
+            text-align: center;
+            padding: 1rem 0;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            letter-spacing: 0.5em;
+        }
+
+        /* ====== MENU ====== */
+        #cardapio {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem 8rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.65rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-eyebrow::before, .section-eyebrow::after {
+            content: '';
+            width: 24px; height: 1px;
+            background: var(--gold);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 4vw, 3.5rem);
+            font-weight: 900;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+
+        .section-title em { font-style: italic; color: var(--red); }
+
+        /* TABS */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.6rem 1.6rem;
+            border-radius: 100px;
+            border: 1px solid rgba(44,36,22,0.15);
+            background: transparent;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--charcoal);
+            cursor: pointer;
+            transition: all 0.22s;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(192,57,43,0.25);
+        }
+
+        /* GRID */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cat-section { display: none; }
+        .cat-section.active { display: block; }
+
+        /* CARD */
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(44,36,22,0.07);
+            transition: transform 0.25s, box-shadow 0.25s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(44,36,22,0.12);
+        }
+
+        .card-img-wrap {
+            height: 200px;
+            background: var(--cream-dark);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .card:hover .card-img-wrap img { transform: scale(1.05); }
+
+        .card-tag {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(250,246,238,0.95);
+            backdrop-filter: blur(8px);
+            font-size: 0.6rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--warm-gray);
+            padding: 0.3rem 0.7rem;
+            border-radius: 100px;
+            border: 1px solid rgba(201,168,76,0.3);
+        }
+
+        .card-body {
+            padding: 1.25rem 1.25rem 1rem;
+        }
+
+        .card-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.3rem;
+        }
+
+        .card-desc {
+            font-size: 0.78rem;
+            color: var(--warm-gray);
+            line-height: 1.55;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.95rem;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.9rem 1.25rem;
+            border-top: 1px solid rgba(44,36,22,0.06);
+        }
+
+        .card-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--red);
+        }
+
+        .add-btn {
+            background: var(--ink);
+            color: #fff;
+            border: none;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.15s;
+            line-height: 1;
+        }
+
+        .add-btn:hover { background: var(--red); transform: scale(1.12); }
+
+        /* ====== SOBRE ====== */
+        #sobre {
+            background: var(--ink);
+            color: var(--cream);
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #sobre::before {
+            content: '';
+            position: absolute;
+            top: -100px; right: -100px;
+            width: 500px; height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+        }
+
+        .sobre-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sobre-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            color: var(--gold);
+            margin-bottom: 1rem;
+        }
+
+        .sobre-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--cream);
+            margin-bottom: 1.5rem;
+        }
+
+        .sobre-title em { font-style: italic; color: var(--gold); }
+
+        .sobre-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(250,246,238,0.7);
+            margin-bottom: 1.2rem;
+        }
+
+        .sobre-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .feature-icon {
+            width: 32px; height: 32px;
+            border-radius: 8px;
+            background: rgba(201,168,76,0.15);
+            border: 1px solid rgba(201,168,76,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .feature-text strong { display: block; font-size: 0.8rem; color: var(--cream); margin-bottom: 0.15rem; }
+        .feature-text span { font-size: 0.72rem; color: rgba(250,246,238,0.5); }
+
+        .sobre-img-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .sobre-img-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 16px;
+        }
+
+        .sobre-img-grid img:first-child {
+            grid-column: 1 / -1;
+            height: 240px;
+        }
+
+        /* ====== CONTATO ====== */
+        #contato {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .contato-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .info-block { margin-bottom: 2rem; }
+
+        .info-label {
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gold);
+            margin-bottom: 0.4rem;
+        }
+
+        .info-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            color: var(--ink);
+        }
+
+        .info-value small {
+            display: block;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            color: var(--warm-gray);
+            font-weight: 400;
+            margin-top: 0.1rem;
+        }
+
+        .horarios-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 0.5rem;
+        }
+
+        .horarios-table tr { border-bottom: 1px solid rgba(44,36,22,0.08); }
+        .horarios-table td { padding: 0.5rem 0; font-size: 0.82rem; }
+        .horarios-table td:first-child { color: var(--warm-gray); }
+        .horarios-table td:last-child { text-align: right; font-weight: 500; }
+        .horarios-table .fechado { color: #ccc; }
+
+        .wpp-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background: #25D366;
+            color: #fff;
+            text-decoration: none;
+            padding: 0.9rem 1.5rem;
+            border-radius: 12px;
+            font-size: 0.82rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+            margin-top: 1.5rem;
+            width: fit-content;
+        }
+
+        .wpp-btn:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37,211,102,0.3);
+        }
+
+        .map-placeholder {
+            background: var(--cream-dark);
+            border-radius: 20px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+            border: 1px dashed rgba(201,168,76,0.4);
+            color: var(--warm-gray);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        .map-placeholder span { font-size: 2.5rem; }
+
+        /* ====== FOOTER ====== */
+        footer {
+            background: var(--ink);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(201,168,76,0.2);
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-style: italic;
+            font-weight: 900;
+            color: var(--red);
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            font-size: 0.75rem;
+            color: rgba(250,246,238,0.4);
+            margin-top: 1.5rem;
+        }
+
+        .footer-links { display: flex; justify-content: center; gap: 2rem; margin: 1rem 0; }
+        .footer-links a { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(250,246,238,0.5); text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--gold); }
+
+        /* ====== MODALS ====== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(28,16,9,0.7);
+            backdrop-filter: blur(4px);
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-box {
+            background: var(--cream);
+            border-radius: 24px;
+            max-width: 440px;
+            width: 100%;
+            overflow: hidden;
+            transform: scale(0.95) translateY(10px);
+            transition: transform 0.3s;
+            box-shadow: 0 40px 80px rgba(28,16,9,0.4);
+        }
+
+        .modal-overlay.open .modal-box { transform: scale(1) translateY(0); }
+
+        .modal-img { width: 100%; height: 220px; object-fit: cover; }
+
+        .modal-body { padding: 1.5rem; }
+
+        .modal-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin-bottom: 0.4rem;
+        }
+
+        .modal-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            color: var(--warm-gray);
+            line-height: 1.6;
+            margin-bottom: 1.25rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .modal-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--red);
+        }
+
+        .modal-add-btn {
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+        }
+
+        .modal-add-btn:hover { background: var(--red-dark); transform: scale(1.04); }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem; right: 1rem;
+            background: rgba(250,246,238,0.9);
+            border: none;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal);
+            font-size: 1.2rem;
+            transition: background 0.2s;
+        }
+
+        .modal-close:hover { background: var(--cream-dark); }
+
+        /* CART MODAL */
+        .cart-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .cart-modal.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .cart-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(28,16,9,0.6);
+            backdrop-filter: blur(4px);
+        }
+
+        .cart-drawer {
+            position: relative;
+            z-index: 1;
+            background: var(--cream);
+            border-radius: 24px 24px 0 0;
+            width: 100%;
+            max-width: 520px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(.25,.8,.25,1);
+            box-shadow: 0 -20px 60px rgba(28,16,9,0.2);
+        }
+
+        .cart-modal.open .cart-drawer { transform: translateY(0); }
+
+        .cart-header {
+            padding: 1.5rem 1.5rem 1rem;
+            border-bottom: 1px solid rgba(44,36,22,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cart-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            font-style: italic;
+        }
+
+        .cart-close {
+            background: rgba(44,36,22,0.06);
+            border: none;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--charcoal);
+            transition: background 0.2s;
+        }
+        .cart-close:hover { background: rgba(44,36,22,0.12); }
+
+        .cart-items { flex: 1; overflow-y: auto; padding: 1rem 1.5rem; }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid rgba(44,36,22,0.07);
+        }
+
+        .cart-item-img {
+            width: 52px; height: 52px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: var(--cream-dark);
+        }
+
+        .cart-item-info { flex: 1; }
+        .cart-item-name { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+        .cart-item-price { font-size: 0.78rem; color: var(--warm-gray); margin-top: 0.1rem; }
+
+        .qty-ctrl {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(44,36,22,0.05);
+            border-radius: 100px;
+            padding: 0.2rem 0.5rem;
+        }
+
+        .qty-btn {
+            background: none;
+            border: none;
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s, color 0.15s;
+        }
+
+        .qty-btn:hover { background: var(--red); color: #fff; }
+        .qty-num { font-size: 0.85rem; font-weight: 600; min-width: 16px; text-align: center; }
+
+        .item-subtotal { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 700; color: var(--red); min-width: 60px; text-align: right; }
+
+        .cart-footer {
+            padding: 1.25rem 1.5rem;
+            border-top: 1px solid rgba(44,36,22,0.08);
+        }
+
+        .cart-total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .cart-total-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--warm-gray); }
+        .cart-total-val { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); }
+
+        .checkout-btn {
+            width: 100%;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            padding: 1rem;
+            border-radius: 14px;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+        }
+
+        .checkout-btn:hover { background: #128C7E; transform: scale(1.01); }
+
+        /* CART FLOAT */
+        .cart-float {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            z-index: 150;
+            padding: 1rem 1.5rem;
+            background: rgba(250,246,238,0.97);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(201,168,76,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transform: translateY(100%);
+            transition: transform 0.35s cubic-bezier(.25,.8,.25,1);
+            box-shadow: 0 -8px 30px rgba(44,36,22,0.1);
+        }
+
+        .cart-float.show { transform: translateY(0); }
+
+        .float-info span { display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--warm-gray); }
+        .float-total { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--red); }
+
+        .float-btn {
+            background: var(--red);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: background 0.2s, transform 0.15s;
+            box-shadow: 0 4px 16px rgba(192,57,43,0.3);
+        }
+
+        .float-btn:hover { background: var(--red-dark); transform: scale(1.04); }
+
+        .empty-cart {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            color: var(--warm-gray);
+        }
+
+        .empty-cart span { font-size: 2.5rem; display: block; margin-bottom: 0.5rem; }
+        .empty-cart p { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; }
+
+        /* ====== WPP FLOAT ====== */
+        .wpp-float {
+            position: fixed;
+            right: 1.5rem; bottom: 5.5rem;
+            z-index: 120;
+            background: #25D366;
+            color: #fff;
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+            transition: transform 0.2s;
+        }
+
+        .wpp-float:hover { transform: scale(1.12); }
+
+        /* ====== TOAST ====== */
+        .toast {
+            position: fixed;
+            top: 90px; right: 1.5rem;
+            z-index: 300;
+            background: var(--ink);
+            color: var(--cream);
+            padding: 0.75rem 1.25rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: all 0.3s;
+            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .toast.show { opacity: 1; transform: translateY(0); }
+
+        /* ====== RESPONSIVE ====== */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+            .hero-inner { grid-template-columns: 1fr; text-align: center; }
+            .hero-visual { order: -1; }
+            .hero-pizza-ring { width: 280px; height: 280px; }
+            .hero-badge { width: 75px; height: 75px; }
+            .hero-stats { justify-content: center; }
+            .hero-eyebrow { justify-content: center; }
+            .sobre-inner { grid-template-columns: 1fr; }
+            .contato-grid { grid-template-columns: 1fr; }
+            .hero-cta-ghost { margin-left: 0; margin-top: 0.75rem; }
+        }
+
+        @media (max-width: 520px) {
+            .menu-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ====== MOBILE NAV ====== */
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            background: var(--cream);
+            z-index: 199;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            transform: translateX(100%);
+            transition: transform 0.35s cubic-bezier(.25,.8,.25,1);
+        }
+
+        .mobile-menu.open { transform: translateX(0); }
+
+        .mobile-menu a {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--ink);
+            text-decoration: none;
+            font-style: italic;
+            transition: color 0.2s;
+        }
+
+        .mobile-menu a:hover { color: var(--red); }
+
+        .mobile-close {
+            position: absolute;
+            top: 1.5rem; right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--charcoal);
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-logo">
+        La Mamma
+        <span>Pizzaria Artesanal</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#sobre">Nossa História</a>
+        <a href="#contato">Contato</a>
+    </div>
+
+    <button class="nav-cart-btn" onclick="abrirCarrinho()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Carrinho
+        <span class="cart-badge" id="cart-badge">0</span>
+    </button>
+
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+    <button class="mobile-close" onclick="toggleMenu()">✕</button>
+    <a href="#home" onclick="toggleMenu()">Home</a>
+    <a href="#cardapio" onclick="toggleMenu()">Cardápio</a>
+    <a href="#sobre" onclick="toggleMenu()">Nossa História</a>
+    <a href="#contato" onclick="toggleMenu()">Contato</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-decor"></div>
+    <div class="hero-inner">
+        <div class="hero-text">
+            <div class="hero-eyebrow">Fermentação Natural</div>
+            <h1 class="hero-title">
+                A pizza que<br>
+                <em>São Paulo</em><br>
+                merecia
+            </h1>
+            <p class="hero-sub">Massa de longa fermentação, ingredientes selecionados e o calor de um forno a lenha. Tradição italiana, coração paulistano.</p>
+            <div>
+                <a href="#cardapio" class="hero-cta">Ver Cardápio</a>
+                <a href="#sobre" class="hero-cta-ghost">Nossa História</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-num">72h</div>
+                    <div class="stat-label">Fermentação</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">+12</div>
+                    <div class="stat-label">Anos de tradição</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-num">500°</div>
+                    <div class="stat-label">Forno a lenha</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="hero-pizza-ring">
+                <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=700&q=85" alt="Pizza Artesanal">
+                <div class="hero-badge">
+                    <div class="hero-badge-inner">
+                        <strong>100%</strong>
+                        Artesanal
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="divider">✦ ✦ ✦</div>
+
+<!-- CARDAPIO -->
+<section id="cardapio">
+    <div class="section-header">
+        <div class="section-eyebrow">O que temos pra você</div>
+        <h2 class="section-title">Nosso <em>Cardápio</em></h2>
+    </div>
+
+    <div class="tabs">
+        <button class="tab-btn active" data-cat="tradicionais">Tradicionais</button>
+        <button class="tab-btn" data-cat="especiais">Especiais</button>
+        <button class="tab-btn" data-cat="bebidas">Bebidas</button>
+        <button class="tab-btn" data-cat="sobremesas">Doces</button>
+    </div>
+
+    <!-- TRADICIONAIS -->
+    <div class="cat-section active" id="cat-tradicionais">
+        <div class="menu-grid">
+            <div class="card" onclick="abrirModal('Pizza Margherita', 42.00, 'Molho de tomate italiano San Marzano, muçarela de búfala e manjericão fresco colhido na hora.', 'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=700&q=85', 'p_1')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=700&q=85" alt="Margherita">
+                    <span class="card-tag">Clássica</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Pizza Margherita</div>
+                    <div class="card-desc">Molho San Marzano, muçarela de búfala e manjericão fresco</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 42</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('p_1','Pizza Margherita',42.00,'https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=200&q=80')">+</button>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal('Pizza Calabresa', 38.00, 'Muçarela artesanal, calabresa defumada no alho e cebola roxa caramelizada.', 'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=700&q=85', 'p_2')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=700&q=85" alt="Calabresa">
+                    <span class="card-tag">Favorita</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Pizza Calabresa</div>
+                    <div class="card-desc">Calabresa artesanal, muçarela e cebola roxa caramelizada</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 38</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('p_2','Pizza Calabresa',38.00,'https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=200&q=80')">+</button>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal('Quatro Queijos', 48.00, 'Muçarela, gorgonzola DOP, parmesão reggiano e provolone defumado.', 'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=700&q=85', 'p_3')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=700&q=85" alt="Quatro Queijos">
+                    <span class="card-tag">Queijos DOP</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Quatro Queijos</div>
+                    <div class="card-desc">Muçarela, gorgonzola, parmesão e provolone defumado</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 48</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('p_3','Quatro Queijos',48.00,'https://images.unsplash.com/photo-1548365328-9f547fb0953b?w=200&q=80')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ESPECIAIS -->
+    <div class="cat-section" id="cat-especiais">
+        <div class="menu-grid">
+            <div class="card" onclick="abrirModal('Parma & Rúcula', 55.00, 'Muçarela de búfala, presunto parma 18 meses, rúcula fresca e tomate seco ao azeite.', 'https://images.unsplash.com/photo-1573821663912-569905455b1c?w=700&q=85', 'e_1')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1573821663912-569905455b1c?w=700&q=85" alt="Parma">
+                    <span class="card-tag">Premium</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Parma & Rúcula</div>
+                    <div class="card-desc">Parma 18 meses, búfala, rúcula fresca e tomate seco</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 55</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('e_1','Parma & Rúcula',55.00,'https://images.unsplash.com/photo-1573821663912-569905455b1c?w=200&q=80')">+</button>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal('Trufada', 62.00, 'Creme de trufas negras, cogumelos Paris salteados, parmesão e finalizada com azeite trufado.', 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&q=85', 'e_2')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700&q=85" alt="Trufada">
+                    <span class="card-tag">Chef's Pick</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Trufada</div>
+                    <div class="card-desc">Creme de trufas negras, cogumelos salteados e azeite trufado</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 62</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('e_2','Trufada',62.00,'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=200&q=80')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BEBIDAS -->
+    <div class="cat-section" id="cat-bebidas">
+        <div class="menu-grid">
+            <div class="card" onclick="abrirModal('Vinho da Casa', 18.00, 'Taça 200ml – Cabernet Sauvignon selecionado pela nossa sommelière. Encorpado e frutado.', 'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=700&q=85', 'b_1')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=700&q=85" alt="Vinho">
+                    <span class="card-tag">Taça 200ml</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Vinho da Casa</div>
+                    <div class="card-desc">Cabernet Sauvignon selecionado — encorpado e frutado</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 18</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('b_1','Vinho da Casa',18.00,'https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=200&q=80')">+</button>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal('Suco Natural', 10.00, 'Suco natural de laranja ou limão espremidos na hora. 400ml refrescante.', 'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=700&q=85', 'b_2')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?w=700&q=85" alt="Suco">
+                    <span class="card-tag">400ml</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Suco Natural</div>
+                    <div class="card-desc">Laranja ou Limão espremidos na hora — 400ml</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 10</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('b_2','Suco Natural',10.00,'https://images.unsplash.com/photo-1613478223719-2ab802602423?w=200&q=80')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- DOCES -->
+    <div class="cat-section" id="cat-sobremesas">
+        <div class="menu-grid">
+            <div class="card" onclick="abrirModal('Pizza de Nutella', 25.00, 'Nossa massa artesanal com Nutella cremosa, morangos frescos e açúcar de confeiteiro.', 'https://images.unsplash.com/photo-1574355598688-660c68615b3c?w=700&q=85', 's_1')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1574355598688-660c68615b3c?w=700&q=85" alt="Nutella">
+                    <span class="card-tag">Doce</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Pizza de Nutella</div>
+                    <div class="card-desc">Nutella, morangos frescos e açúcar de confeiteiro</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 25</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('s_1','Pizza de Nutella',25.00,'https://images.unsplash.com/photo-1574355598688-660c68615b3c?w=200&q=80')">+</button>
+                </div>
+            </div>
+
+            <div class="card" onclick="abrirModal('Tiramisù', 22.00, 'Clássico italiano com café espresso, cacau, creme de mascarpone e biscoito Savoiardi.', 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=700&q=85', 's_2')">
+                <div class="card-img-wrap">
+                    <img src="https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=700&q=85" alt="Tiramisu">
+                    <span class="card-tag">Clássico</span>
+                </div>
+                <div class="card-body">
+                    <div class="card-name">Tiramisù</div>
+                    <div class="card-desc">Mascarpone, café espresso e cacau — receita da nonna</div>
+                </div>
+                <div class="card-footer">
+                    <div class="card-price">R$ 22</div>
+                    <button class="add-btn" onclick="event.stopPropagation(); adicionarItem('s_2','Tiramisù',22.00,'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?w=200&q=80')">+</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+    <div class="sobre-inner">
+        <div>
+            <div class="sobre-label">Nossa História</div>
+            <h2 class="sobre-title">Feita com amor, <em>servida com tradição</em></h2>
+            <p class="sobre-text">Nascemos em 2012 com uma missão simples: trazer a autêntica pizza napolitana para Sorocaba. Nossa massa passa 72 horas em fermentação natural, desenvolvendo sabores que nenhuma pressa consegue criar.</p>
+            <p class="sobre-text">Cada ingrediente é selecionado diretamente de produtores italianos e brasileiros comprometidos com qualidade. O resultado é uma pizza que conta uma história a cada mordida.</p>
+            <div class="sobre-features">
+                <div class="feature-item">
+                    <div class="feature-icon">🌾</div>
+                    <div class="feature-text">
+                        <strong>Farinha Caputo</strong>
+                        <span>Importada de Nápoles</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔥</div>
+                    <div class="feature-text">
+                        <strong>Forno a Lenha</strong>
+                        <span>500°C de calor real</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🧑‍🍳</div>
+                    <div class="feature-text">
+                        <strong>Mestre Pizzaiolo</strong>
+                        <span>Certificado em Nápoles</span>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌿</div>
+                    <div class="feature-text">
+                        <strong>Ingredientes Frescos</strong>
+                        <span>Entregues diariamente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sobre-img-grid">
+            <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=700&q=80" alt="Pizzaria">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&q=80" alt="Pizza forno">
+            <img src="https://images.unsplash.com/photo-1528137871618-79d2761e3fd5?w=400&q=80" alt="Preparo">
+        </div>
+    </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+    <div class="section-header">
+        <div class="section-eyebrow">Onde estamos</div>
+        <h2 class="section-title">Venha nos <em>visitar</em></h2>
+    </div>
+
+    <div class="contato-grid">
+        <div>
+            <div class="info-block">
+                <div class="info-label">Endereço</div>
+                <div class="info-value">Rua das Pizzas, 123
+                    <small>Centro – Sorocaba, SP</small>
+                </div>
+            </div>
+
+            <div class="info-block">
+                <div class="info-label">Horários de Funcionamento</div>
+                <table class="horarios-table">
+                    <tr><td>Segunda</td><td class="fechado">Fechado</td></tr>
+                    <tr><td>Terça – Sexta</td><td>18h – 23h30</td></tr>
+                    <tr><td>Sábado</td><td>17h30 – 00h</td></tr>
+                    <tr><td>Domingo</td><td>17h30 – 23h</td></tr>
+                </table>
+            </div>
+
+            <div class="info-block">
+                <div class="info-label">Pedidos & Reservas</div>
+                <div class="info-value">(15) 98765-4321</div>
+            </div>
+
+            <a href="https://wa.me/5515987654321" target="_blank" class="wpp-btn">
+                <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.392-10.686c-4.237 0-7.675 3.438-7.675 7.675 0 1.407.366 2.73 1.015 3.868l-1.353 4.954 5.068-1.331c1.102.582 2.346.907 3.653.907 4.234 0 7.672-3.438 7.672-7.674 0-4.235-3.438-7.672-7.672-7.672h-.008z"/></svg>
+                Falar pelo WhatsApp
+            </a>
+        </div>
+
+        <div class="map-placeholder">
+            <span>📍</span>
+            <strong>Rua das Pizzas, 123</strong>
+            <p>Centro – Sorocaba, SP</p>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="footer-logo">La Mamma</div>
+    <div class="footer-links">
+        <a href="#home">Home</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+    </div>
+    <p>© 2025 La Mamma Pizzaria. Feito com ❤️ e farinha Caputo.</p>
+</footer>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="prod-modal" onclick="fecharModal(event)">
+    <div class="modal-box" style="position:relative">
+        <button class="modal-close" onclick="fecharModalBtn()">✕</button>
+        <img id="mod-img" class="modal-img" src="" alt="">
+        <div class="modal-body">
+            <div class="modal-name" id="mod-nome"></div>
+            <div class="modal-desc" id="mod-desc"></div>
+            <div class="modal-footer">
+                <div class="modal-price" id="mod-preco"></div>
+                <button class="modal-add-btn" id="mod-add-btn">Adicionar ao Pedido</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CART MODAL -->
+<div class="cart-modal" id="cart-modal">
+    <div class="cart-overlay" onclick="fecharCarrinho()"></div>
+    <div class="cart-drawer">
+        <div class="cart-header">
+            <div class="cart-title">Seu Pedido</div>
+            <button class="cart-close" onclick="fecharCarrinho()">✕</button>
+        </div>
+        <div class="cart-items" id="cart-items"></div>
+        <div class="cart-footer">
+            <div class="cart-total-row">
+                <span class="cart-total-label">Total</span>
+                <span class="cart-total-val" id="cart-total-val">R$ 0,00</span>
+            </div>
+            <button class="checkout-btn" onclick="finalizarPedido()">
+                <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.392-10.686c-4.237 0-7.675 3.438-7.675 7.675 0 1.407.366 2.73 1.015 3.868l-1.353 4.954 5.068-1.331c1.102.582 2.346.907 3.653.907 4.234 0 7.672-3.438 7.672-7.674 0-4.235-3.438-7.672-7.672-7.672h-.008z"/></svg>
+                Finalizar via WhatsApp
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- CART FLOAT -->
+<div class="cart-float" id="cart-float">
+    <div class="float-info">
+        <span>Total do pedido</span>
+        <div class="float-total" id="float-total">R$ 0,00</div>
+    </div>
+    <button class="float-btn" onclick="abrirCarrinho()">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        Ver Pedido
+    </button>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/5515987654321" target="_blank" class="wpp-float">
+    <svg width="26" height="26" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.392-10.686c-4.237 0-7.675 3.438-7.675 7.675 0 1.407.366 2.73 1.015 3.868l-1.353 4.954 5.068-1.331c1.102.582 2.346.907 3.653.907 4.234 0 7.672-3.438 7.672-7.674 0-4.235-3.438-7.672-7.672-7.672h-.008z"/></svg>
+</a>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Adicionado ao pedido</div>
+
+<script>
+    // TABS
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const catSections = document.querySelectorAll('.cat-section');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const cat = btn.dataset.cat;
+            tabBtns.forEach(b => b.classList.remove('active'));
+            catSections.forEach(s => s.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('cat-' + cat).classList.add('active');
         });
-    </script>
+    });
+
+    // CART STATE
+    let cart = JSON.parse(localStorage.getItem('lamamma_cart') || '[]');
+
+    function salvarCart() {
+        localStorage.setItem('lamamma_cart', JSON.stringify(cart));
+    }
+
+    function adicionarItem(id, nome, preco, img) {
+        if (navigator.vibrate) navigator.vibrate(60);
+        const idx = cart.findIndex(i => i.id === id);
+        if (idx !== -1) {
+            cart[idx].qty += 1;
+        } else {
+            cart.push({ id, nome, preco, img: img || '', qty: 1 });
+        }
+        salvarCart();
+        renderCartFloat();
+        showToast(nome);
+    }
+
+    function removerItem(id) {
+        const idx = cart.findIndex(i => i.id === id);
+        if (idx === -1) return;
+        if (cart[idx].qty > 1) cart[idx].qty--;
+        else cart.splice(idx, 1);
+        salvarCart();
+        renderCartFloat();
+        renderCartDrawer();
+        if (cart.length === 0) fecharCarrinho();
+    }
+
+    function aumentarItem(id) {
+        const idx = cart.findIndex(i => i.id === id);
+        if (idx !== -1) { cart[idx].qty++; salvarCart(); renderCartFloat(); renderCartDrawer(); }
+    }
+
+    function getTotal() {
+        return cart.reduce((s, i) => s + i.preco * i.qty, 0);
+    }
+
+    function fmtBRL(v) {
+        return v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    }
+
+    function renderCartFloat() {
+        const fl = document.getElementById('cart-float');
+        const badge = document.getElementById('cart-badge');
+        const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+
+        if (cart.length === 0) {
+            fl.classList.remove('show');
+            badge.classList.remove('show');
+        } else {
+            fl.classList.add('show');
+            badge.classList.add('show');
+            badge.textContent = totalItems;
+            document.getElementById('float-total').textContent = fmtBRL(getTotal());
+        }
+    }
+
+    function renderCartDrawer() {
+        const container = document.getElementById('cart-items');
+        if (cart.length === 0) {
+            container.innerHTML = `<div class="empty-cart"><span>🍕</span><p>Seu carrinho está vazio.</p></div>`;
+            document.getElementById('cart-total-val').textContent = 'R$ 0,00';
+            return;
+        }
+
+        container.innerHTML = cart.map(item => `
+            <div class="cart-item">
+                <img class="cart-item-img" src="${item.img}" alt="${item.nome}" onerror="this.style.display='none'">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${item.nome}</div>
+                    <div class="cart-item-price">${fmtBRL(item.preco)}</div>
+                </div>
+                <div class="qty-ctrl">
+                    <button class="qty-btn" onclick="removerItem('${item.id}')">−</button>
+                    <span class="qty-num">${item.qty}</span>
+                    <button class="qty-btn" onclick="aumentarItem('${item.id}')">+</button>
+                </div>
+                <div class="item-subtotal">${fmtBRL(item.preco * item.qty)}</div>
+            </div>
+        `).join('');
+
+        document.getElementById('cart-total-val').textContent = fmtBRL(getTotal());
+    }
+
+    function abrirCarrinho() {
+        renderCartDrawer();
+        document.getElementById('cart-modal').classList.add('open');
+    }
+
+    function fecharCarrinho() {
+        document.getElementById('cart-modal').classList.remove('open');
+    }
+
+    function finalizarPedido() {
+        if (cart.length === 0) return;
+        let msg = '🍕 *Olá! Gostaria de fazer um pedido:*\n\n';
+        cart.forEach(i => {
+            msg += `• ${i.qty}x ${i.nome} — ${fmtBRL(i.preco * i.qty)}\n`;
+        });
+        msg += `\n*Total: ${fmtBRL(getTotal())}*`;
+        window.open(`https://wa.me/5515987654321?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // PRODUCT MODAL
+    let currentModalItem = null;
+
+    function abrirModal(nome, preco, desc, img, id) {
+        currentModalItem = { id, nome, preco, img };
+        document.getElementById('mod-img').src = img;
+        document.getElementById('mod-nome').textContent = nome;
+        document.getElementById('mod-desc').textContent = desc;
+        document.getElementById('mod-preco').textContent = fmtBRL(preco);
+        document.getElementById('mod-add-btn').onclick = () => {
+            adicionarItem(id, nome, preco, img);
+            fecharModalBtn();
+        };
+        document.getElementById('prod-modal').classList.add('open');
+    }
+
+    function fecharModal(e) {
+        if (e.target === document.getElementById('prod-modal')) fecharModalBtn();
+    }
+
+    function fecharModalBtn() {
+        document.getElementById('prod-modal').classList.remove('open');
+    }
+
+    // TOAST
+    function showToast(nome) {
+        const t = document.getElementById('toast');
+        t.textContent = `✓ ${nome} adicionado`;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), 2200);
+    }
+
+    // MOBILE MENU
+    function toggleMenu() {
+        document.getElementById('mobile-menu').classList.toggle('open');
+    }
+
+    // INIT
+    renderCartFloat();
+</script>
 </body>
 </html>
